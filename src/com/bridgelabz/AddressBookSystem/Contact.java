@@ -96,4 +96,16 @@ public class Contact {
         setEmail(sc.nextLine());
     }
 
+    public void viewContactData()
+    {
+        System.out.print("\n First Name:-" +firstName);
+        System.out.print("\n Last Name:-" +lastName);
+        System.out.print("\n Address:-" +address);
+        System.out.print("\n City:-" +city);
+        System.out.print("\n State:-" +state);
+        System.out.print("\n Zip Code:-" +zipcode);
+        System.out.print("\n Mobile Number:-" +phoneNo);
+        System.out.println("\n Email Id:-" +email);
+    }
+
 }
