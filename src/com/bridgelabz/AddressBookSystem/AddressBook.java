@@ -78,4 +78,17 @@ public class AddressBook extends Contact{
         }
     }
 
+    public void deleteContact(){
+        System.out.println("Enter the first name of person to delete");
+        String firstName = scanner.next();
+
+        if (firstName.equals(contact.firstName)){
+            contact=null;
+        }
+        else{
+            System.out.println("no contact found");
+        }
+
+    }
+
 }
