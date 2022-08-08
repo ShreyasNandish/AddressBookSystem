@@ -1,9 +1,11 @@
 package com.bridgelabz.AddressBookSystem;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class AddressBookMain {
     public static void main(String[] args) {
+        HashMap<String,AddressBook>map = new HashMap<>();
         System.out.println("Welcome to Address Book");
         AddressBook addressBook = new AddressBook();
 
@@ -11,6 +13,16 @@ public class AddressBookMain {
 
         boolean exit = true;
         while (exit) {
+            AddressBook add = new AddressBook();
+            System.out.println("Enter the address book name :");
+            String addressBookName = scanner.nextLine();
+            if(map.containsKey(addressBookName))
+            {
+                System.out.println("Address already exists");
+            }
+            else {
+                map.put(addressBookName,add);
+            }
             System.out.println("Select option: \n" +
                     "1.Add Contact \n" +
                     "2.Edit Contact \n" +
