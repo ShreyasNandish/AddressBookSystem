@@ -15,7 +15,8 @@ public class AddressBookMain {
                     "1.Add Contact \n" +
                     "2.Edit Contact \n" +
                     "3.Show Contact \n"+
-                    "4.Exit");
+                    "4.Delete \n" +
+                    "5.Exit");
             int option = scanner.nextInt();
             switch (option) {
                 case 1:
@@ -28,6 +29,9 @@ public class AddressBookMain {
                     addressBook.ShowDetails();
                     break;
                 case 4:
+                    addressBook.deleteContact();
+                    break;
+                case 5:
                     exit = false;
                 default:
                     break;
