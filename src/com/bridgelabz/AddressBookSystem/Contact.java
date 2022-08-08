@@ -11,12 +11,12 @@ public class Contact {
     long phoneNumber;
     String email;
 
-    Contact()
+    public Contact()
     {
 
     }
 
-    Contact(String firstName, String lastName, String address, String city, String state, double zipCode, long phoneNumber, String email)
+    public Contact(String firstName, String lastName, String address, String city, String state, double zipCode, long phoneNumber, String email)
     {
         this.firstName=firstName;
         this.lastName=lastName;
@@ -26,6 +26,20 @@ public class Contact {
         this.zipCode=zipCode;
         this.phoneNumber=phoneNumber;
         this.email=email;
+    }
+
+    @Override
+    public String toString() {
+        return "Contacts{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zip=" + zipCode +
+                ", phoneNumber=" + phoneNumber +
+                ", email='" + email + '\'' +
+                "}\n";
     }
 }
 
