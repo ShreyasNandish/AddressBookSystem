@@ -4,99 +4,180 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AddressBook extends Contact {
-    ArrayList<Contact> arrayList = new ArrayList<>();
-    static Scanner scanner = new Scanner(System.in);
-    //Contact contact = new Contact(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
+    ArrayList<Contact> list = new ArrayList<>();
+    Scanner scr = new Scanner(System.in);
 
-       public void addContact(){
-            System.out.println("Enter the first name");
-            String firstName = scanner.next().toLowerCase();
-            System.out.println("Enter the last name");
-            String lastName = scanner.next().toLowerCase();
-            for (Contact contact : arrayList) {
-                if ((contact.getFirstName().toLowerCase().equals(firstName)) && (contact.getLastName().toLowerCase().equals(lastName))) {
-                    System.out.println("Contact already exist!!!");
-                    return;
-                }
+
+    void addContact() {
+        System.out.println("Enter the first name");
+        String firstName = scr.next().toLowerCase();
+        System.out.println("Enter the last name");
+        String lastName = scr.next().toLowerCase();
+        for (Contact contacts : list) {
+            if ((contacts.getFirstName().toLowerCase().equals(firstName)) && (contacts.getLastName().toLowerCase().equals(lastName))) {
+                System.out.println("Contact already exist!!!");
+                return;
             }
-            Contact contact = new Contact();
-            contact.setFirstName(firstName);
-            contact.setLastName(lastName);
-            System.out.print("Enter city: ");
-            contact.setCity(scanner.next());
-            System.out.print("Enter state: ");
-            contact.setState(scanner.next());
-            System.out.print("Enter address:  ");
-            scanner.nextLine();
-            contact.setAddress(scanner.nextLine());
-            System.out.print("Enter Zipcode: ");
-            contact.setZipCode(scanner.nextInt());
-            System.out.print("Enter phone Number: ");
-            contact.setPhoneNumber(scanner.nextInt());
-            System.out.print("Enter email address: ");
-            contact.setEmail(scanner.next());
-            arrayList.add(contact);
         }
-
-
-    public void ShowDetails() {
-        System.out.println("First name is :" + firstName);
-        System.out.println("Last name is :" + lastName);
-        System.out.println("Address is :" + address);
-        System.out.println("City is :" + city);
-        System.out.println("State is :" + state);
-        System.out.println("Zip code is :" + zipCode);
-        System.out.println("Phone number is :" + phoneNumber);
-        System.out.println("Email is :" + email);
+        Contact contact = new Contact();
+        contact.setFirstName(firstName);
+        contact.setLastName(lastName);
+        System.out.print("Enter city: ");
+        contact.setCity(scr.next());
+        System.out.print("Enter state: ");
+        contact.setState(scr.next());
+        System.out.print("Enter address:  ");
+        scr.nextLine();
+        contact.setAddress(scr.nextLine());
+        System.out.print("Enter Zipcode: ");
+        contact.setZipCode(scr.nextInt());
+        System.out.print("Enter phone Number: ");
+        contact.setPhoneNumber(scr.nextInt());
+        System.out.print("Enter email address: ");
+        contact.setEmail(scr.next());
+        list.add(contact);
     }
 
-    public void editDetails() {
-        if (arrayList.isEmpty()) {
-            System.out.println("Empty");
-        } else {
-            System.out.println("Enter first name ");
-            String firstName = scanner.next();
+
+
+    void editContact(){
+        if(list.isEmpty()){
+            System.out.println("Address book is empty");
+        }
+        else {
+            System.out.println("Enter the first name of person to edit");
+            String firstName = scr.next().toLowerCase();
+            System.out.println("Enter the last name of person to edit");
+            String lastName = scr.next().toLowerCase();
+
             boolean found = false;
-            for (Contact contact : arrayList) {
-                if (firstName.equals(contact.firstName)) {
-                    System.out.println("Enter First Name:");
-                    contact.firstName = scanner.next();
-                    System.out.println("Enter Last Name:");
-                    contact.lastName = scanner.next();
-                    System.out.println("Enter Address:");
-                    contact.address = scanner.next();
-                    System.out.println("Enter the city");
-                    contact.city = scanner.next();
-                    System.out.println("Enter the state:");
-                    contact.state = scanner.next();
-                    System.out.println("Enter the zip code :");
-                    contact.zipCode = scanner.nextDouble();
-                    System.out.println("Enter Phone number :");
-                    contact.phoneNumber = scanner.nextLong();
-                    System.out.println("Enter email :");
-                    contact.email = scanner.next();
+            for (Contact contact : list) {
+                if (firstName.equals(contact.getFirstName().toLowerCase())) {
+                    if (lastName.equals(contact.getLastName())) {
+                        System.out.println("Edit the details of person");
+                        System.out.print("Enter first name: ");
+                        contact.setFirstName(scr.next());
+
+                        System.out.print("Enter last Name: ");
+                        contact.setLastName(scr.next());
+
+                        System.out.print("Enter Email: ");
+                        contact.setEmail(scr.next());
+
+                        System.out.print("Enter address: ");
+                        scr.nextLine();
+                        contact.setAddress(scr.nextLine());
+
+                        System.out.print("Enter phone number: ");
+                        contact.setPhoneNumber(scr.nextInt());
+
+                        System.out.print("Enter state: ");
+                        contact.setState(scr.next());
+
+                        System.out.print("Enter city: ");
+                        contact.setCity(scr.next());
+
+                        System.out.print("Enter zip: ");
+                        contact.setZipCode(scr.nextInt());
+                        found = true;
+                        break;
+                    }
+
                 }
             }
-        }
-    }
-
-    public void deleteContact() {
-        System.out.println("Enter the first name of person to delete");
-        String firstName = scanner.next();
-
-        for (Contact contact : arrayList) {
-            if (firstName.equals(contact.firstName)) {
-                arrayList.remove(contact);
-                break;
-            } else {
-                System.out.println("no contact found");
+            if (!found) {
+                System.out.println("No contact found");
             }
         }
     }
 
-    @Override
-    public String toString()
-    {
-        return arrayList +"}\n";
+
+    void searchContact(){
+        if(list.isEmpty()){
+            System.out.println("No contacts to search in the addressBook");
+            return;
+        }
+        boolean exit = false;
+        while(!exit) {
+            System.out.println("""
+                Enter option
+                1) To search by City
+                2) To search by State
+                3) To exit
+                """);
+            int option = scr.nextInt();
+
+            switch (option) {
+                case 1:
+                    System.out.println("Enter the city to search contacts");
+                    String city = scr.next().toLowerCase();
+                    for (Contact contacts : list) {
+                        if (contacts.getCity().toLowerCase().contains(city)) {
+                            System.out.println(contacts);
+                        }
+                    }
+                    break;
+                case 2:
+                    System.out.println("Enter the city to search contacts");
+                    String state = scr.next().toLowerCase();
+                    for (Contact contacts : list) {
+                        if (contacts.getState().toLowerCase().contains(state)) {
+                            System.out.println(contacts);
+                        }
+                    }
+                    break;
+                case 3:
+                    exit = true;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
+
+
+    void deleteContact(){
+        if(list.isEmpty()){
+            System.out.println("Address book is empty");
+        }
+        else {
+            System.out.println("Enter the first name of person to delete");
+            String firstName = scr.next().toLowerCase();
+            System.out.println("Enter the last name of person to delete");
+            String lastName = scr.next().toLowerCase();
+            boolean found = false;
+            for (Contact contact :list){
+                if (firstName.equals(contact.getFirstName().toLowerCase())) {
+                    if (lastName.equals(contact.getLastName())) {
+                        list.remove(contact);
+                        found = true;
+                        System.out.println("Contact deleted successfully");
+                        break;
+                    }
+                }
+            }
+            if (!found){
+                System.out.println("No contact found");
+            }
+        }
+    }
+
+
+    void displayContacts(){
+        if(list.isEmpty()){
+            System.out.println("No contacts to display");
+        }
+        else {
+            for (Contact contact : list) {
+                System.out.println(contact);
+            }
+        }
+
+    }
+    @Override
+    public String toString() {
+        return  list +
+                "}\n";
+    }
+
 }

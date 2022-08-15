@@ -4,74 +4,82 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class AddressBookMain {
-    static HashMap<String,AddressBook>map = new HashMap<>();
-    static String currentAddressBookName;
+    static Scanner scanner = new Scanner(System.in);
+    static HashMap<String, AddressBook> map = new HashMap<>();
+    static String currentAddressBook;
     static String addressBookName;
 
     public static void main(String[] args) {
-        System.out.println("Welcome to Address Book");
-        Scanner scanner = new Scanner(System.in);
-    boolean exit = false;
+
+        System.out.println("Welcome to Address Book Program");
+
+        boolean exit = false;
         while (!exit) {
-        System.out.println("""
+            System.out.println("""
                     \nEnter options:
-                    1) To add contact
-                    2) To edit Contact
-                    3) To display Contacts
-                    4) To delete contact
-                    5) To add address book or select addressBook
-                    6) To exit""");
+                    1) add contact
+                    2) edit Contact
+                    3) display Contacts
+                    4) delete contact
+                    5) add address book or select addressBook
+                    6) search contact
+                    7) exit""");
 
-        int option = scanner.nextInt();
-        switch (option) {
-            case 1:
-                try {
-                    map.get(currentAddressBookName).addContact();
-                } catch (Exception e) {
-                    System.out.println("\nNo AddressBook Found\n");
-                }
+            int option = scanner.nextInt();
+            switch (option) {
+                case 1:
+                    try {
+                        map.get(currentAddressBook).addContact();
+                    } catch (Exception e) {
+                        System.out.println("\nNo AddressBook Found\n");
+                    }
 
-                break;
-            case 2:
-                try {
-                    map.get(currentAddressBookName).editDetails();
-                } catch (Exception e) {
-                    System.out.println("\nNo AddressBook Found\n");
-                }
-                break;
-            case 3:
-                try {
-                    map.get(currentAddressBookName).ShowDetails();
-                } catch (Exception e) {
-                    System.out.println("\nNo AddressBook Found\n");
-                }
-                break;
-            case 4:
-                try {
-                    map.get(currentAddressBookName).deleteContact();
-                } catch (Exception e) {
-                    System.out.println("\nNo AddressBook Found\n");
-                }
-                break;
-            case 5:
-                chooseAddressBook();
-                break;
-            case 6:
-                exit = true;
-                break;
-            default:
-                break;
+                    break;
+                case 2:
+                    try {
+                        map.get(currentAddressBook).editContact();
+                    } catch (Exception e) {
+                        System.out.println("\nNo AddressBook Found\n");
+                    }
+                    break;
+                case 3:
+                    try {
+                        map.get(currentAddressBook).displayContacts();
+                    } catch (Exception e) {
+                        System.out.println("\nNo AddressBook Found\n");
+                    }
+                    break;
+                case 4:
+                    try {
+                        map.get(currentAddressBook).deleteContact();
+                    } catch (Exception e) {
+                        System.out.println("\nNo AddressBook Found\n");
+                    }
+                    break;
+                case 5:
+                    chooseAddressBook();
+                    break;
+                case 6:
+                    try {
+                        map.get(currentAddressBook).searchContact();
+                    } catch (Exception e) {
+                        System.out.println("\nNo AddressBook Found\n");
+                    }
+                    break;
+                case 7:
+                    exit = true;
+                    break;
+                default:
+                    break;
+            }
         }
-    }
         System.out.println(map);
-}
-
+    }
 
     static void chooseAddressBook() {
         System.out.println("""
         Press 1 to add AddressBook
         Press 2 to select AddressBook""");
-        Scanner scanner = new Scanner(System.in);
 
         int option = scanner.nextInt();
         switch (option) {
@@ -84,7 +92,7 @@ public class AddressBookMain {
                 } else {
                     AddressBook addressBook = new AddressBook();
                     map.put(addressBookName, addressBook);
-                    currentAddressBookName = addressBookName;
+                    currentAddressBook = addressBookName;
                 }
 
                 break;
@@ -95,7 +103,7 @@ public class AddressBookMain {
                     System.out.println("\nAddressBook not Found\n");
                     chooseAddressBook();
                 } else
-                    currentAddressBookName = addressBookName;
+                    currentAddressBook = addressBookName;
                 break;
             default:
                 break;
