@@ -5,30 +5,39 @@ import java.util.Scanner;
 
 public class AddressBook extends Contact {
     ArrayList<Contact> arrayList = new ArrayList<>();
-    Scanner scanner = new Scanner(System.in);
-    Contact contact = new Contact(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
+    static Scanner scanner = new Scanner(System.in);
+    //Contact contact = new Contact(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
 
-    public void contactDetails() {
-        System.out.println("Enter First Name:-");
-        firstName = scanner.next();
-        System.out.println("Enter Last Name:-");
-        lastName = scanner.next();
-        System.out.println("Enter Address:-");
-        address = scanner.next();
-        System.out.println("Enter the city");
-        city = scanner.next();
-        System.out.println("Enter the state:-");
-        state = scanner.next();
-        System.out.println("Enter the zip code :-");
-        zipCode = scanner.nextDouble();
-        System.out.println("Enter Phone number :-");
-        phoneNumber = scanner.nextLong();
-        System.out.println("Enter email :-");
-        email = scanner.next();
+       public void addContact(){
+            System.out.println("Enter the first name");
+            String firstName = scanner.next().toLowerCase();
+            System.out.println("Enter the last name");
+            String lastName = scanner.next().toLowerCase();
+            for (Contact contact : arrayList) {
+                if ((contact.getFirstName().toLowerCase().equals(firstName)) && (contact.getLastName().toLowerCase().equals(lastName))) {
+                    System.out.println("Contact already exist!!!");
+                    return;
+                }
+            }
+            Contact contact = new Contact();
+            contact.setFirstName(firstName);
+            contact.setLastName(lastName);
+            System.out.print("Enter city: ");
+            contact.setCity(scanner.next());
+            System.out.print("Enter state: ");
+            contact.setState(scanner.next());
+            System.out.print("Enter address:  ");
+            scanner.nextLine();
+            contact.setAddress(scanner.nextLine());
+            System.out.print("Enter Zipcode: ");
+            contact.setZipCode(scanner.nextInt());
+            System.out.print("Enter phone Number: ");
+            contact.setPhoneNumber(scanner.nextInt());
+            System.out.print("Enter email address: ");
+            contact.setEmail(scanner.next());
+            arrayList.add(contact);
+        }
 
-        arrayList.add(new Contact(firstName, lastName, address, city, state, zipCode, phoneNumber, email));
-        System.out.println("Added successfully");
-    }
 
     public void ShowDetails() {
         System.out.println("First name is :" + firstName);
@@ -83,5 +92,11 @@ public class AddressBook extends Contact {
                 System.out.println("no contact found");
             }
         }
+    }
+
+    @Override
+    public String toString()
+    {
+        return arrayList +"}\n";
     }
 }
