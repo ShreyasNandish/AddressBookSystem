@@ -1,11 +1,14 @@
 package com.bridgelabz.AddressBookSystem;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class AddressBookMain {
     static Scanner scanner = new Scanner(System.in);
+    static AddressBook addressBook;
     static HashMap<String, AddressBook> map = new HashMap<>();
+    public static ArrayList<String> addressBooks = new ArrayList<>();
     static String currentAddressBook;
     static String addressBookName;
 
@@ -44,7 +47,7 @@ public class AddressBookMain {
                     break;
                 case 3:
                     try {
-                        map.get(currentAddressBook).displayContacts();
+                        addressBook.displayContacts();
                     } catch (Exception e) {
                         System.out.println("\nNo AddressBook Found\n");
                     }
@@ -61,7 +64,7 @@ public class AddressBookMain {
                     break;
                 case 6:
                     try {
-                        map.get(currentAddressBook).searchContact();
+                        addressBook.searchContact();
                     } catch (Exception e) {
                         System.out.println("\nNo AddressBook Found\n");
                     }
@@ -90,10 +93,11 @@ public class AddressBookMain {
                     System.out.println("\nAddress book already exist\n");
                     chooseAddressBook();
                 } else {
-                    AddressBook addressBook = new AddressBook();
+                    addressBook = new AddressBook();
                     map.put(addressBookName, addressBook);
                     currentAddressBook = addressBookName;
                 }
+                addressBooks.add(addressBookName);
 
                 break;
             case 2:
