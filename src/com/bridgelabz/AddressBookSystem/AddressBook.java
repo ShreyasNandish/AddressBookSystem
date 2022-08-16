@@ -2,9 +2,14 @@ package com.bridgelabz.AddressBookSystem;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddressBook extends Contact {
     ArrayList<Contact> list = new ArrayList<>();
+
+    Map<Contact,String> cityDictionary  = new HashMap<>();
+    Map<Contact,String> stateDictionary  = new HashMap<>();
     Scanner scr = new Scanner(System.in);
 
 
@@ -111,18 +116,22 @@ public class AddressBook extends Contact {
                 case 1:
                     System.out.println("Enter the city to search contacts");
                     String city = scr.next().toLowerCase();
-                    for (Contact contacts : list) {
-                        if (contacts.getCity().toLowerCase().contains(city)) {
-                            System.out.println(contacts);
+                    for (AddressBook addressBook : AddressBookMain.map.values()) {
+                        for (Contact contacts : addressBook.list) {
+                            if (contacts.getCity().toLowerCase().contains(city)) {
+                                System.out.println(contacts);
+                            }
                         }
                     }
                     break;
                 case 2:
                     System.out.println("Enter the city to search contacts");
                     String state = scr.next().toLowerCase();
-                    for (Contact contacts : list) {
-                        if (contacts.getState().toLowerCase().contains(state)) {
-                            System.out.println(contacts);
+                    for (AddressBook addressBook : AddressBookMain.map.values()) {
+                        for (Contact contacts : addressBook.list) {
+                            if (contacts.getState().toLowerCase().contains(state)) {
+                                System.out.println(contacts);
+                            }
                         }
                     }
                     break;
@@ -164,15 +173,54 @@ public class AddressBook extends Contact {
 
 
     void displayContacts(){
-        if(list.isEmpty()){
-            System.out.println("No contacts to display");
-        }
-        else {
-            for (Contact contact : list) {
-                System.out.println(contact);
+            if(list.isEmpty()){
+                System.out.println("No contacts to display");
+                return;
             }
-        }
+            boolean exit = false;
+            while(!exit) {
+                System.out.println("""
+                    Enter option
+                    1) To view by City
+                    2) To view by State
+                    3) To exit
+                    """);
+                int option = scr.nextInt();
 
+                switch (option) {
+                    case 1:
+                        System.out.println("Enter the city name to view");
+                        String city = scr.next().toLowerCase();
+                        for (AddressBook addressBooks : AddressBookMain.map.values()) {
+                            for (Contact contacts : addressBooks.list) {
+                                if (contacts.getCity().toLowerCase().contains(city)) {
+                                    cityDictionary.put(contacts,city);
+                                }
+                            }
+                        }
+                        System.out.println("Contacts in city "+city+" are:");
+                        System.out.println(cityDictionary.keySet());
+                        break;
+                    case 2:
+                        System.out.println("Enter the state name to view");
+                        String state = scr.next().toLowerCase();
+                        for (AddressBook addressBooks : AddressBookMain.map.values()) {
+                            for (Contact contacts : addressBooks.list) {
+                                if (contacts.getState().toLowerCase().contains(state)) {
+                                    stateDictionary.put(contacts,state);
+                                }
+                            }
+                        }
+                        System.out.println("Contacts in state "+state+" are:");
+                        System.out.println(stateDictionary.keySet());
+                        break;
+                    case 3:
+                        exit = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
     }
     @Override
     public String toString() {
