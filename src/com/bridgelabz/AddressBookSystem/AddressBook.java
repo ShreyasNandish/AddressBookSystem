@@ -200,6 +200,7 @@ public class AddressBook extends Contact {
                         }
                         System.out.println("Contacts in city "+city+" are:");
                         System.out.println(cityDictionary.keySet());
+                        System.out.println("no of contacts in city are " +cityDictionary.size());
                         break;
                     case 2:
                         System.out.println("Enter the state name to view");
@@ -213,6 +214,7 @@ public class AddressBook extends Contact {
                         }
                         System.out.println("Contacts in state "+state+" are:");
                         System.out.println(stateDictionary.keySet());
+                        System.out.println("no of contacts in state are " +stateDictionary.size());
                         break;
                     case 3:
                         exit = true;

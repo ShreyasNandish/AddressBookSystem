@@ -76,7 +76,7 @@ public class AddressBookMain {
                     break;
             }
         }
-        System.out.println(map);
+        System.out.println(addressBooks);
     }
 
     static void chooseAddressBook() {
