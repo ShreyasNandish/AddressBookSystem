@@ -1,5 +1,6 @@
 package com.bridgelabz.AddressBookSystem;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -11,7 +12,7 @@ public class AddressBook extends Contact {
     Scanner scanner = new Scanner(System.in);
 
 
-    void addContact() {
+    void addContact() throws IOException {
         System.out.println("Enter the first name");
         String firstName = scanner.next().toLowerCase();
         System.out.println("Enter the last name");
@@ -90,7 +91,7 @@ public class AddressBook extends Contact {
         }
     }
 
-    void searchContact(){
+    void searchContact() throws IOException{
         if(list.isEmpty()){
             System.out.println("No contacts to search in the addressBook");
             return;
@@ -124,6 +125,17 @@ public class AddressBook extends Contact {
             }
         }
     }
+
+    void writeData() throws IOException {
+        FileIOService fileIOService = new FileIOService();
+        fileIOService.writeData();
+    }
+
+    void readData() throws IOException {
+        FileIOService fileIOService = new FileIOService();
+        fileIOService.readData();
+    }
+
 
     void displayContacts(){
         if(list.isEmpty()){
