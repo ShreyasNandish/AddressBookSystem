@@ -181,16 +181,45 @@ public class AddressBook extends Contact {
                     break;
                 default:
                     break;
-
             }
         }
+    }
 
+    public void sortByState()
+    {
+        if (list.isEmpty())
+        {
+            System.out.println("No contacts found");
+            return;
+        }
+        list.sort(Comparator.comparing(Contact::getState));
+        list.forEach(System.out::println);
+    }
 
+    public void sortByCity()
+    {
+        if (list.isEmpty())
+        {
+            System.out.println("No contacts found");
+            return;
+        }
+        list.sort(Comparator.comparing(Contact::getCity));
+        list.forEach(System.out::println);
+    }
+
+    public void sortByZipCode()
+    {
+        if (list.isEmpty())
+        {
+            System.out.println("No contacts found");
+            return;
+        }
+        list.sort(Comparator.comparing(Contact::getZipCode));
+        list.forEach(System.out::println);
     }
     @Override
     public String toString() {
         return  list +
                 "}\n";
     }
-
 }
