@@ -7,8 +7,8 @@ public class Contact {
     String address;
     String city;
     String state;
-    double zipCode;
-    long phoneNumber;
+    String zipCode;
+    String phoneNumber;
     String email;
 
 
@@ -52,19 +52,19 @@ public class Contact {
         this.state = state;
     }
 
-    public double getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(double zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 
-    public long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -81,7 +81,7 @@ public class Contact {
 
     }
 
-    public Contact(String firstName, String lastName, String address, String city, String state, double zipCode, long phoneNumber, String email)
+    public Contact(String firstName, String lastName, String address, String city, String state, String zipCode, String phoneNumber, String email)
     {
         this.firstName=firstName;
         this.lastName=lastName;

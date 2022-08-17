@@ -1,5 +1,6 @@
 package com.bridgelabz.AddressBookSystem;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,12 +33,39 @@ public class AddressBook extends Contact {
         scanner.nextLine();
         contact.setAddress(scanner.nextLine());
         System.out.print("Enter Zipcode: ");
-        contact.setZipCode(scanner.nextInt());
+        contact.setZipCode(scanner.nextLine());
         System.out.print("Enter phone Number: ");
-        contact.setPhoneNumber(scanner.nextInt());
+        contact.setPhoneNumber(scanner.nextLine());
         System.out.print("Enter email address: ");
         contact.setEmail(scanner.next());
+        list.sort(Comparator.comparing(Contact::getFirstName));
         list.add(contact);
+    }
+
+    void writeAddressBook(ArrayList<Contact> arrayList,String addressBookName) throws IOException {
+        System.out.println("Enter\n 1) To write to txt file\n 2) To write to CSV file");
+        int option = scanner.nextInt();
+        switch (option){
+            case 1:
+                FileReadWrite.writeTxt(arrayList, addressBookName);
+                break;
+            case 2:
+                FileReadWrite.writeCSV(arrayList, addressBookName);
+                break;
+        }
+    }
+
+    void readAddressBook(String addressBookName) throws IOException {
+        System.out.println("Select option \n1.read from text file \n2.read from csv file");
+        int option = scanner.nextInt();
+        switch (option) {
+            case 1:
+                FileReadWrite.readTxtFile(new File(FileReadWrite.PATH.concat(addressBookName+".txt")));
+                break;
+            case 2:
+                FileReadWrite.readCSVFile(new File(FileReadWrite.PATH.concat( addressBookName +".csv")));
+                break;
+        }
     }
 
     void editContact(){
@@ -69,7 +97,7 @@ public class AddressBook extends Contact {
                         contact.setAddress(scanner.nextLine());
 
                         System.out.print("Enter phone number: ");
-                        contact.setPhoneNumber(scanner.nextInt());
+                        contact.setPhoneNumber(scanner.nextLine());
 
                         System.out.print("Enter state: ");
                         contact.setState(scanner.next());
@@ -78,7 +106,7 @@ public class AddressBook extends Contact {
                         contact.setCity(scanner.next());
 
                         System.out.print("Enter zip: ");
-                        contact.setZipCode(scanner.nextInt());
+                        contact.setZipCode(scanner.nextLine());
                         found = true;
                         break;
                     }
@@ -126,15 +154,15 @@ public class AddressBook extends Contact {
         }
     }
 
-    void writeData() throws IOException {
-        FileIOService fileIOService = new FileIOService();
-        fileIOService.writeData();
-    }
+//    void writeData() throws IOException {
+//        FileIOService fileIOService = new FileIOService();
+//        fileIOService.writeData();
+//    }
 
-    void readData() throws IOException {
-        FileIOService fileIOService = new FileIOService();
-        fileIOService.readData();
-    }
+//    void readData() throws IOException {
+//        FileIOService fileIOService = new FileIOService();
+//        fileIOService.readData();
+//    }
 
 
     void displayContacts(){
