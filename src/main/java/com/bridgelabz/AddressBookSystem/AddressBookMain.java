@@ -1,5 +1,6 @@
 package com.bridgelabz.AddressBookSystem;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -26,7 +27,9 @@ public class AddressBookMain {
                     4) delete contact
                     5) add address book or select addressBook
                     6) search contact
-                    7) exit""");
+                    7)To read address book from file
+                    8)To write address book from file
+                    9) exit""");
 
             int option = scanner.nextInt();
             switch (option) {
@@ -70,6 +73,18 @@ public class AddressBookMain {
                     }
                     break;
                 case 7:
+                    try {
+                        map.get(currentAddressBook).writeAddressBook(map.get(currentAddressBook).list,currentAddressBook);
+                    } catch (IOException e) {
+                        System.out.println("Catch BLock");
+                    }
+                case 8:
+                    try {
+                        map.get(currentAddressBook).readAddressBook(currentAddressBook);
+                    } catch (IOException e) {
+                        System.out.println("Catch BLock");
+                    }
+                case 9:
                     exit = true;
                     break;
                 default:
@@ -98,7 +113,6 @@ public class AddressBookMain {
                     currentAddressBook = addressBookName;
                 }
                 addressBooks.add(addressBookName);
-
                 break;
             case 2:
                 System.out.println("Enter address book name");
